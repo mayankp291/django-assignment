@@ -21,7 +21,7 @@ def fetch_and_store_currencies():
             serializer.save()
             print(f"Currency {name} with code {symbol} saved successfully")
 
-def populate_exchange_rates():
+def populate_exchange_rates(historical_from_date: str, historical_to_date: str):
     """	
     Fetches historical exchange rates from the API and stores it in the CurrencyConversionRates database
     """
@@ -32,8 +32,11 @@ def populate_exchange_rates():
     CurrencyConversionRates.objects.all().delete()
     
     # define a function to fetch data and process it
-    def fetch_and_process(from_curr):
-        url = f"https://api.frankfurter.app/2024-01-01..?from={from_curr}"
+    def fetch_and_process(from_curr: str):
+        if historical_from_date and historical_to_date:
+            url = f"https://api.frankfurter.app/{historical_from_date}..{historical_to_date}?from={from_curr}"
+        else:
+            url = f"https://api.frankfurter.app/2024-01-01..?from={from_curr}"
         response = requests.get(url)
         data = response.json()
         process_json(data)

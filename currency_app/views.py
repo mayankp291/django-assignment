@@ -32,10 +32,7 @@ class CurrencyListApiView(APIView):
         """
         API View to add a new currency
         """	
-        data = {
-            "name": request.data.get("name"),
-            "symbol": request.data.get("symbol")
-        }
+        data = JSONParser().parse(request)
         serializer = CurrencySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -52,10 +49,17 @@ class CurrencyListApiView(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
 
 class LoadCurrencies(APIView):
-    def get(self, request):
-        try:
+    def post(self, request):
+        try:     
+            data = JSONParser().parse(request)
+            historical_from_date = data.get('historical_from_date')
+            historical_to_date = data.get('historical_to_date')
+            load_historical_data = data.get('load_historical_data')
             fetch_and_store_currencies()
-            populate_exchange_rates()
+            
+            if load_historical_data:
+                populate_exchange_rates(historical_from_date, historical_to_date)
+            
             return Response({
                 "status": "success",
                 "message": "Currencies loaded successfully"
