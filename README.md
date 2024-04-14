@@ -99,11 +99,16 @@ Body:
 
 ## Admin Panel
 
-A view of Currency Model
+### A view of Currency Model
+![image](https://github.com/mayankp291/django-assignment/assets/69447074/a8a864a2-2400-496a-bdb0-64642386e704)
 
-A view of Currency Conversion Rates Model
+
+### A view of Currency Conversion Rates Model
+Filtered by USD/SGD rates
+![image](https://github.com/mayankp291/django-assignment/assets/69447074/a0a9de01-ca60-49e9-b57c-d17bc725c3a4)
+
 
 
 ## Forex Data
 
-The forex data used is provided from Frankfurter API, which is an exchange rates and conversion API for currency data published by the European Central Bank. I used this over Yahoo Finance as more currencies were available and it allowed me to get rates between any 2 currencies.
+The forex data used is provided from [Frankfurter API](https://www.frankfurter.app/), which is an exchange rates and conversion API for currency data published by the European Central Bank. I used this over Yahoo Finance as more currencies were available and it allowed me to get rates between any 2 currencies.
